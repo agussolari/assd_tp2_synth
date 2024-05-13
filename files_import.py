@@ -5,6 +5,11 @@ from mido import Message, MidiFile, MidiTrack
 import threading
 import time as tt
 
+#Definir constantes
+PIANO_BOX = 1
+GUITAR_BOX = 2
+
+
 
 
 def import_track_files(self, i):
@@ -79,15 +84,17 @@ def notes_proccessing(self, i):
             
             if(node_ins_box[i-1] == 1):
                 print("Sintetizando piano")
-                self.track_data.track_1_samples = synthesis(track)
-                
+                if (i == 1):
+                    self.track_data.track_1_samples = synthesis_piano(track)
+                elif (i == 2):
+                    self.track_data.track_2_samples = synthesis_piano(track)
+                elif (i == 3):
+                    self.track_data.track_3_samples = synthesis_piano(track)
+            elif(node_ins_box[i-1] == 2):
+                print("Sintetizando guitarra")                
             
 
             
-            # print(mid_data)
-            # pl.plot_notes_over_time(notes, times, types, self, i)
-
-            # pl.plot_spectrogram(notes, velocities, times, self)
         
         
         
@@ -139,7 +146,7 @@ def get_notes_from_track(track):
         })
     return notes
 
-def synthesis (track):
+def synthesis_piano (track):
     track_notes = get_notes_from_track(track)
     
     min_pitch = min(note['pitch'] for note in track_notes)

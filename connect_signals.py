@@ -21,9 +21,13 @@ def connect_proccess_notes(self):
     
 def connect_play_buttons(self):
     self.play_track_1.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_1_samples))
+    self.play_track_2.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_2_samples))
+    self.play_track_3.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_3_samples))
     
 def connect_stop_buttons(self):
     self.stop_track_1.clicked.connect(lambda: fi.stop_playback())
+    self.stop_track_2.clicked.connect(lambda: fi.stop_playback())
+    self.stop_track_3.clicked.connect(lambda: fi.stop_playback())
 
 def enable_buttons(self):
     if self.track_1_enable.isChecked():

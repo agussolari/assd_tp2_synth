@@ -83,16 +83,21 @@
        </rect>
       </property>
       <property name="currentIndex">
-       <number>-1</number>
+       <number>0</number>
       </property>
       <item>
        <property name="text">
-        <string>Guitarra</string>
+        <string>None</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>Piano</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Guitarra</string>
        </property>
       </item>
       <item>
@@ -264,12 +269,17 @@
       </property>
       <item>
        <property name="text">
-        <string>Guitarra</string>
+        <string>None</string>
        </property>
       </item>
       <item>
        <property name="text">
         <string>Piano</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Guitarra</string>
        </property>
       </item>
       <item>
@@ -307,14 +317,14 @@
      <widget class="QTabWidget" name="tabWidget_3">
       <property name="geometry">
        <rect>
-        <x>180</x>
+        <x>160</x>
         <y>20</y>
         <width>511</width>
         <height>191</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>2</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_9">
        <attribute name="title">
@@ -362,6 +372,32 @@
        </widget>
       </widget>
      </widget>
+     <widget class="QPushButton" name="play_track_3">
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>0</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Play</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="stop_track_3">
+      <property name="geometry">
+       <rect>
+        <x>550</x>
+        <y>0</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stop</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QGroupBox" name="track_2">
      <property name="geometry">
@@ -407,14 +443,14 @@
      <widget class="QTabWidget" name="tabWidget_2">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>20</y>
+        <x>170</x>
+        <y>40</y>
         <width>511</width>
         <height>181</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_8">
        <attribute name="title">
@@ -499,7 +535,7 @@
       </property>
       <item>
        <property name="text">
-        <string>Guitarra</string>
+        <string>None</string>
        </property>
       </item>
       <item>
@@ -509,9 +545,40 @@
       </item>
       <item>
        <property name="text">
+        <string>Guitarra</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>ASDR</string>
        </property>
       </item>
+     </widget>
+     <widget class="QPushButton" name="play_track_2">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>10</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Play</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="stop_track_2">
+      <property name="geometry">
+       <rect>
+        <x>560</x>
+        <y>10</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stop</string>
+      </property>
      </widget>
     </widget>
    </widget>

@@ -50,19 +50,19 @@ def plot_spectrogram(mid_data ,self, i):
     colormap = matplotlib.cm.get_cmap('viridis')  # Puedes cambiar 'viridis' a cualquier colormap que te guste
     amplitude_color = colormap(sxx)
     
-    img.setImage(amplitude_color, xvals=tt/10, yvals=f)  # Divide el eje horizontal por 10
+    img.setImage(amplitude_color, xvals=t, yvals=f)  # Divide el eje horizontal por 10
     
     #plot
     node_plots[i-1].clear()
     node_plots[i-1].addItem(img)
     node_plots[i-1].setLabel('left', 'Frequency', units='Hz')
-    node_plots[i-1].setLabel('bottom', 'Time', units='s/10')
+    node_plots[i-1].setLabel('bottom', 'Time', units='s')
 
 def midi_to_freq(midi_note):
     return 440.0 * np.power(2.0, (midi_note - 69) / 12.0)
 
 def temporal(int_tiempos, int_velocities):
-    t = np.linspace(0, 4, 5000)
+    t = np.linspace(0, get_song_duration(int_tiempos), 44100)
     y = np.zeros_like(t)
 
     for note, times in int_tiempos.items():
@@ -74,6 +74,12 @@ def temporal(int_tiempos, int_velocities):
 
     return t, y
 
+def get_song_duration(song_data):
+    max_time = 0
+    for note_intervals in song_data.values():
+        for interval in note_intervals:
+            max_time = max(max_time, interval[1])
+    return max_time
 
 def plot_temporal(mid_data, self, i):
     node_plots = [self.track_1_temporal, self.track_2_temporal, self.track_3_temporal]
@@ -102,6 +108,7 @@ def plot_scatter(mid_data, self, i):
 
     int_tiempos, int_velocities = procesar_midi_messages(mid_data)
     
+    # print(int_tiempos, int_velocities)
     #plot scatter
     node_plots[i-1].clear()
     for note, intervals in int_tiempos.items():
@@ -122,6 +129,7 @@ def procesar_midi_messages(midi_messages):
     current_notes = {}
     current_time = 0
     current_velocity = 0  # Initialize current_velocity
+    # print('midi message', midi_messages)
 
     for message in midi_messages:
         current_time += message.time
