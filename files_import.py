@@ -27,21 +27,14 @@ def import_track_files(self, i):
 
 def leer_archivo_midi(ruta_archivo):
     try:
-        mid = MidiFile(ruta_archivo)
+        mid = pretty_midi.PrettyMIDI(ruta_archivo)
         return mid
     except Exception as e:
         print("Error al leer el archivo MIDI:", e)
         return None
 
 def dividir_pistas(mid, canal_deseado):
-    mensajes_filtrados = []  # Usar una lista para almacenar mensajes filtrados
-    tiempo_actual = 0  # Inicializar el tiempo del mensaje anterior
-
-    for mensaje in mid:
-        if hasattr(mensaje, 'channel') and mensaje.channel == canal_deseado:
-            mensajes_filtrados.append(mensaje)
-            
-    return mensajes_filtrados
+    return mid.instruments[canal_deseado].notes
 
 
 def notes_proccessing(self, i):
@@ -60,7 +53,7 @@ def notes_proccessing(self, i):
 
         mid = leer_archivo_midi(  node_filenames[i-1] )
         if mid is not None:
-            mid_data = dividir_pistas(mid, int(node_box[i]))
+            mid_data = dividir_pistas(mid, int(node_box[i-1]))
             # print(mid_data)
             if i == 1:
                 self.track_data.track_1_mid = mid_data
@@ -80,14 +73,11 @@ def notes_proccessing(self, i):
             pl.plot_spectrogram(mid_data, self, i)
             
             
-            mid_data_ins = pretty_midi.PrettyMIDI(node_filenames[i-1])
-            track = mid_data_ins.instruments[node_box[i-1]]
-            
             
             if(node_ins_box[i-1] == 1):
                 print("Sintetizando piano")
                 if (i == 1):
-                    self.track_data.track_1_samples = synthesis_piano(track)
+                    self.track_data.track_1_samples = synthesis_piano(self.track_data.track_1_mid)
                 # elif (i == 2):
                 #     self.track_data.track_2_samples = synthesis_piano(track)
                 # elif (i == 3):
@@ -138,7 +128,7 @@ sample_rate = 44100
 
 def get_notes_from_track(track):
     notes = []
-    for note in track.notes:
+    for note in track:
         notes.append({
             'pitch': note.pitch,
             'start': note.start,

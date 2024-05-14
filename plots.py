@@ -70,7 +70,7 @@ def temporal(int_tiempos, int_velocities):
         for time in times:
             start, end = time
             mask = (t >= start) & (t < end)
-            y[mask] += np.sin(2 * np.pi * freq * t[mask]) * int_velocities[note][0][1] / 128.0
+            y[mask] += np.sin(2 * np.pi * freq * t[mask]) * int_velocities[note][0] / 128.0
 
     return t, y
 
@@ -120,36 +120,29 @@ def plot_scatter(mid_data, self, i):
     
     
             
-from collections import defaultdict
 
 
 def procesar_midi_messages(midi_messages):
-    notas = defaultdict(list)
-    velocities = defaultdict(list)
-    current_notes = {}
-    current_time = 0
-    current_velocity = 0  # Initialize current_velocity
-    # print('midi message', midi_messages)
-
+    int_tiempos = {}
+    int_velocities = {}
+    
     for message in midi_messages:
-        current_time += message.time
-        if message.type == 'note_on':
-            current_notes[message.note] = current_time
-        elif message.type == 'note_off':
-            note = message.note
-            start_time = current_notes.pop(note, None)
-            if start_time is not None:
-                notas[note].append([start_time, current_time])
-                velocities[note].append([current_velocity, message.velocity])
-        elif message.type == 'control_change' and message.control == 7:
-            current_velocity = message.value
-
-    int_tiempos = {note: notas[note] for note in notas}
-    int_velocities = {note: velocities[note] for note in velocities}
-
+        pitch = message.pitch
+        start = message.start
+        end = message.end
+        velocity = message.velocity
+        
+        if pitch not in int_tiempos:
+            int_tiempos[pitch] = []
+            int_velocities[pitch] = []
+        
+        # Añadir el intervalo de tiempo
+        int_tiempos[pitch].append([start, end])
+        
+        # Añadir la velocidad para el intervalo de tiempo
+        int_velocities[pitch].append(velocity)
+    
     return int_tiempos, int_velocities
-
-
 
 
 
