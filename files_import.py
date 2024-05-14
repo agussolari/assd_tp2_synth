@@ -44,17 +44,11 @@ def notes_proccessing(self, i):
     node_box = [self.channel_1_box.value(), self.channel_2_box.value(), self.channel_3_box.value()]
     node_mid = [self.track_data.track_1_mid, self.track_data.track_2_mid, self.track_data.track_3_mid]
     node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_samples]
-    node_ins_box = [self.track_1_box.currentIndex(), self.track_2_box.currentIndex(), self.track_3_box.currentIndex()]
     
     if node_filenames[i-1] != []:
-        
-        print("procesando notas:", i)
-        # print(i, type(i))
-
         mid = leer_archivo_midi(  node_filenames[i-1] )
         if mid is not None:
             mid_data = dividir_pistas(mid, int(node_box[i-1]))
-            # print(mid_data)
             if i == 1:
                 self.track_data.track_1_mid = mid_data
             elif i == 2:
@@ -62,30 +56,38 @@ def notes_proccessing(self, i):
             elif i == 3:
                 self.track_data.track_3_mid = mid_data
             
-            # types, times, notes, velocities = pl.parse_data(mensajes_filtrados)
-            # print(types, times, notes, velocities)
-            
-            # print(mid_data)
-            
-            
-            pl.plot_scatter(mid_data, self, i)
-            pl.plot_temporal(mid_data, self, i)
-            pl.plot_spectrogram(mid_data, self, i)
+                        
+        
             
             
             
-            if(node_ins_box[i-1] == 1):
-                print("Sintetizando piano")
-                if (i == 1):
-                    self.track_data.track_1_samples = synthesis_piano(self.track_data.track_1_mid)
-                # elif (i == 2):
-                #     self.track_data.track_2_samples = synthesis_piano(track)
-                # elif (i == 3):
-                #     self.track_data.track_3_samples = synthesis_piano(track)
-            elif(node_ins_box[i-1] == 2):
-                print("Sintetizando guitarra")                
-            
+def synth_data(self, i):
+    node_ins_box = [self.track_1_box.currentIndex(), self.track_2_box.currentIndex(), self.track_3_box.currentIndex()]
 
+    if(node_ins_box[i-1] == PIANO_BOX):
+        print("Sintetizando piano")
+        if (i == 1):
+            self.track_data.track_1_samples = synthesis_piano(self.track_data.track_1_mid)
+        elif (i == 2):
+            self.track_data.track_2_samples = synthesis_piano(self.track_data.track_2_mid)
+        elif (i == 3):
+            self.track_data.track_3_samples = synthesis_piano(self.track_data.track_3_mid)
+        print("Sintetizacion finalizada")
+    elif(node_ins_box[i-1] == GUITAR_BOX):
+        print("Sintetizando guitarra")                
+
+
+def plot_data(self, i):
+    if i == 1:
+        mid_data = self.track_data.track_1_mid
+    elif i == 2:
+        mid_data = self.track_data.track_2_mid
+    elif i == 3:
+        mid_data = self.track_data.track_3_mid
+        
+    pl.plot_scatter(mid_data, self, i)
+    pl.plot_temporal(mid_data, self, i)
+    pl.plot_spectrogram(mid_data, self, i)
             
         
         
@@ -98,7 +100,9 @@ import sounddevice as sd
 # Variable global para controlar la reproducción
 stop_playing = False
 
-def thread_play_midi(samples):
+def thread_play_midi(self, i):
+    node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_samples]
+    samples = node_samples[i-1]
     global stop_playing
     stop_playing = False
     midi_thread = threading.Thread(target=play_midi, args=(samples, ))
@@ -112,12 +116,13 @@ def stop_playback():
     
     
 def play_midi(samples):
-    while not stop_playing:
-        print("Playing MIDI")
-        sd.play(samples, 44100)
-        sd.wait()
-        print("Playback finished")
-        stop_playback()
+    if len(samples) != 0:
+        while not stop_playing:
+            print("Playing MIDI")
+            sd.play(samples, 44100)
+            sd.wait()
+            print("Playback finished")
+            stop_playback()
 
 
 import numpy as np

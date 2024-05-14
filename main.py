@@ -1,6 +1,7 @@
 import subprocess
 
 import connect_signals as cs
+import numpy as np
 
 
 subprocess.run(["pyuic5", "-x", "qt_gui.ui", "-o", "py_gui.py"])
@@ -66,6 +67,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         cs.connect_proccess_notes(self)
         cs.connect_play_buttons(self)
         cs.connect_stop_buttons(self)
+        cs.connect_plot_buttons(self)
+        cs.connect_synth_data(self)
         
         
 

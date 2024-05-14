@@ -50,7 +50,7 @@ def plot_spectrogram(mid_data ,self, i):
     colormap = matplotlib.cm.get_cmap('viridis')  # Puedes cambiar 'viridis' a cualquier colormap que te guste
     amplitude_color = colormap(sxx)
     
-    img.setImage(amplitude_color, xvals=t, yvals=f)  # Divide el eje horizontal por 10
+    img.setImage(amplitude_color, xvals=t/10, yvals=f)  # Divide el eje horizontal por 10
     
     #plot
     node_plots[i-1].clear()
