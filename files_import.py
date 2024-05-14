@@ -22,6 +22,8 @@ def import_track_files(self, i):
             self.track_data.track_2_filename = filename[0]
         elif i == 3:
             self.track_data.track_3_filename = filename[0]
+    notes_proccessing(self, i)
+    
 
 def leer_archivo_midi(ruta_archivo):
     try:
@@ -55,11 +57,10 @@ def notes_proccessing(self, i):
         
         print("procesando notas:", i)
         # print(i, type(i))
-        print(node_filenames[i-1])
 
         mid = leer_archivo_midi(  node_filenames[i-1] )
         if mid is not None:
-            mid_data = dividir_pistas(mid, int(node_box[i-1]))
+            mid_data = dividir_pistas(mid, int(node_box[i]))
             # print(mid_data)
             if i == 1:
                 self.track_data.track_1_mid = mid_data
@@ -72,6 +73,7 @@ def notes_proccessing(self, i):
             # print(types, times, notes, velocities)
             
             # print(mid_data)
+            
             
             pl.plot_scatter(mid_data, self, i)
             pl.plot_temporal(mid_data, self, i)
@@ -86,10 +88,10 @@ def notes_proccessing(self, i):
                 print("Sintetizando piano")
                 if (i == 1):
                     self.track_data.track_1_samples = synthesis_piano(track)
-                elif (i == 2):
-                    self.track_data.track_2_samples = synthesis_piano(track)
-                elif (i == 3):
-                    self.track_data.track_3_samples = synthesis_piano(track)
+                # elif (i == 2):
+                #     self.track_data.track_2_samples = synthesis_piano(track)
+                # elif (i == 3):
+                #     self.track_data.track_3_samples = synthesis_piano(track)
             elif(node_ins_box[i-1] == 2):
                 print("Sintetizando guitarra")                
             
@@ -124,8 +126,8 @@ def play_midi(samples):
         print("Playing MIDI")
         sd.play(samples, 44100)
         sd.wait()
-        if stop_playing:
-            sd.stop()
+        print("Playback finished")
+        stop_playback()
 
 
 import numpy as np

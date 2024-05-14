@@ -7,9 +7,6 @@ def connect_import_files(self):
     self.track_3_import.clicked.connect(lambda: fi.import_track_files(self,3))
     
 def connect_proccess_notes(self):
-    self.track_1_import.clicked.connect(lambda: fi.notes_proccessing(self, 1))
-    self.track_2_import.clicked.connect(lambda: fi.notes_proccessing(self, 2))
-    self.track_3_import.clicked.connect(lambda: fi.notes_proccessing(self, 3))
     self.channel_1_box.valueChanged.connect(lambda: fi.notes_proccessing(self, 1))
     self.channel_2_box.valueChanged.connect(lambda: fi.notes_proccessing(self, 2))
     self.channel_3_box.valueChanged.connect(lambda: fi.notes_proccessing(self, 3))
@@ -21,13 +18,13 @@ def connect_proccess_notes(self):
     
 def connect_play_buttons(self):
     self.play_track_1.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_1_samples))
-    self.play_track_2.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_2_samples))
-    self.play_track_3.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_3_samples))
+    # self.play_track_2.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_2_samples))
+    # self.play_track_3.clicked.connect(lambda: fi.thread_play_midi(self.track_data.track_3_samples))
     
 def connect_stop_buttons(self):
     self.stop_track_1.clicked.connect(lambda: fi.stop_playback())
-    self.stop_track_2.clicked.connect(lambda: fi.stop_playback())
-    self.stop_track_3.clicked.connect(lambda: fi.stop_playback())
+    # self.stop_track_2.clicked.connect(lambda: fi.stop_playback())
+    # self.stop_track_3.clicked.connect(lambda: fi.stop_playback())
 
 def enable_buttons(self):
     if self.track_1_enable.isChecked():
