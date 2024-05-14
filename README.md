@@ -41,7 +41,7 @@ Para instalar este proyecto, sigue estos pasos:
 
 ## Ensayo con "Concierto de Aranjuez"
 
-Para demostrar la funcionalidad del programa, se recomienda ensayar con un fragmento considerable del segundo movimiento (Adagio) del Concierto de Aranjuez, de Joaquín Rodrigo. Puedes encontrar archivos MIDI de esta obra en la web.
+Para demostrar la funcionalidad del programa, se recomienda ensayar con un fragmento considerable del segundo movimiento (Adagio) del Concierto de Aranjuez, de Joaquín Rodrigo. Puedes encontrar archivos MIDI de esta obra como la de demas artistas en la carpeta mid_files dentro de src
 
 ---
 
