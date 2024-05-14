@@ -15,7 +15,7 @@ def cargar_muestras(ruta_banco):
         muestras[nota] = data.astype(np.float32) # Almacenar la muestra de sonido en el diccionario, la clave es la nota
     return muestras
 
-path_banco_muestras = "Piano2"
+path_banco_muestras = "src/Piano2"
 banco_muestras = cargar_muestras(path_banco_muestras)
 #Función de búsqueda binaria para encontrar la muestra más cercana en el banco de muestras
 def binary_search(arr, target):
