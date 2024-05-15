@@ -88,7 +88,7 @@ def ajustar_altura_audio(audio, diferencia_bins, vel=1.0, dur=1.0):
 
 
 #Función que engloba todo el proceso de sintesis y devuelve el arreglo modificado solo recibiendo la nota midi, velocidad y duración
-def sample_synthesis(nota_midi, vel, dur):
+def synth_piano(nota_midi, vel, dur):
     """Sintesis de un piano basado en muestras.
 
     Recibe nota_midi (int), vel(de 0 a 127 int) y la duración en segundos de la nota.

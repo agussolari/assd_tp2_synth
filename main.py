@@ -2,7 +2,7 @@ import subprocess
 
 import connect_signals as cs
 import numpy as np
-
+import files_import as fi
 
 subprocess.run(["pyuic5", "-x", "qt_gui.ui", "-o", "py_gui.py"])
 
@@ -13,6 +13,8 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from py_gui import Ui_MainWindow
 from pyqtgraph import PlotWidget
+from PyQt5.QtCore import pyqtSignal, QThread
+
 # import pyqtgraph as pg
 
 from matplotlib.backends.backend_qt5agg import (NavigationToolbar2QT as NavigationToolbar)
@@ -38,28 +40,25 @@ class track_data:
 
     
 
-
+    
 class MainWindow(QMainWindow, Ui_MainWindow):
     
+
     
     def __init__(self):
         
-        super().__init__()
+        super().__init__()        
+        
         self.setupUi(self)
         
         self.setWindowTitle('ASSD - GUI - DAW')
         # self.setWindowIcon(QIcon('logo.jpg'))
         
         
+        
         self.show()
         self.track_data = track_data()
         
-        # self.node_filenames = [self.track_data.track_1_filename, self.track_data.track_2_mid, self.track_data.track_3_mid]
-        # self.node_mid = [self.track_data.track_1_mid, self.track_data.track_2_mid, self.track_data.track_3_mid]
-        # self.node_plots = [self.track_1_temporal, self.track_2_temporal, self.track_3_temporal]
-        # self.node_box = [self.channel_1_box.value(), self.channel_2_box.value(), self.channel_3_box.value()]
-
-
         
         
         cs.connect_import_files(self)
@@ -73,6 +72,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         
 
     # def connect_signals(self):
+
 
 def main():
     app = QApplication([])

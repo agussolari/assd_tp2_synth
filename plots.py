@@ -24,14 +24,34 @@ def parse_data(data):
 
     return np.array (types), np.array(times), np.array(notes), np.array(velocities)
 
-def calcular_espectrograma(t, y):
-    # Calcular la frecuencia de muestreo
-    fs = 1 / (t[1] - t[0])
+def calcular_espectrograma(tt, y):
 
     # Calcular el espectrograma
-    f, t, sxx = signal.spectrogram(y, fs, nperseg=256, noverlap=128, nfft=1024, window='hann', scaling='spectrum')
+    f, t, sxx = signal.spectrogram(y)
 
     return t, f, sxx
+
+def plot_spectrogram_from_samples(self, samples):
+    
+    
+    f, t, Sxx = signal.spectrogram(samples)
+    img = pg.ImageItem()
+    Sxx = Sxx.T
+    
+    # Color to Sxx
+    colormap = matplotlib.cm.get_cmap('viridis')  # Puedes cambiar 'viridis' a cualquier colormap que te guste
+    amplitude_color = colormap(Sxx)
+    img.setImage(amplitude_color, xvals=t, yvals=f)
+    
+    # Plot
+    self.track_spectrum.clear()
+    self.track_spectrum.addItem(img)
+    self.track_spectrum.setLabel('left', 'Frequency', units='Hz')
+    self.track_spectrum.setLabel('bottom', 'Time', units='s')
+    
+
+    
+
 
 def plot_spectrogram(mid_data ,self, i):
     node_plots = [self.track_1_spectrum, self.track_2_spectrum, self.track_3_spectrum]
@@ -50,7 +70,7 @@ def plot_spectrogram(mid_data ,self, i):
     colormap = matplotlib.cm.get_cmap('viridis')  # Puedes cambiar 'viridis' a cualquier colormap que te guste
     amplitude_color = colormap(sxx)
     
-    img.setImage(amplitude_color, xvals=t/10, yvals=f)  # Divide el eje horizontal por 10
+    img.setImage(amplitude_color, xvals=t, yvals=f)  # Divide el eje horizontal por 10
     
     #plot
     node_plots[i-1].clear()
