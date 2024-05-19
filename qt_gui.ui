@@ -20,7 +20,7 @@
       <x>10</x>
       <y>10</y>
       <width>731</width>
-      <height>751</height>
+      <height>721</height>
      </rect>
     </property>
     <property name="title">
@@ -29,9 +29,9 @@
     <widget class="QGroupBox" name="track_1">
      <property name="geometry">
       <rect>
-       <x>0</x>
+       <x>10</x>
        <y>20</y>
-       <width>700</width>
+       <width>731</width>
        <height>230</height>
       </rect>
      </property>
@@ -45,7 +45,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>110</y>
+        <y>150</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -60,8 +60,8 @@
       </property>
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>40</y>
+        <x>10</x>
+        <y>20</y>
         <width>81</width>
         <height>20</height>
        </rect>
@@ -77,7 +77,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>150</y>
+        <y>180</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -102,15 +102,40 @@
       </item>
       <item>
        <property name="text">
-        <string>ASDR</string>
+        <string>Hihat</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Kick</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Clarinete</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Tuba</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Saxo</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Snare</string>
        </property>
       </item>
      </widget>
      <widget class="QSpinBox" name="channel_1_box">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>80</y>
+        <x>50</x>
+        <y>70</y>
         <width>42</width>
         <height>22</height>
        </rect>
@@ -122,8 +147,8 @@
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>60</y>
+        <x>30</x>
+        <y>50</y>
         <width>55</width>
         <height>16</height>
        </rect>
@@ -137,7 +162,7 @@
        <rect>
         <x>170</x>
         <y>40</y>
-        <width>511</width>
+        <width>501</width>
         <height>181</height>
        </rect>
       </property>
@@ -154,7 +179,7 @@
           <x>0</x>
           <y>0</y>
           <width>491</width>
-          <height>141</height>
+          <height>151</height>
          </rect>
         </property>
        </widget>
@@ -191,6 +216,9 @@
       </widget>
      </widget>
      <widget class="QPushButton" name="play_track_1">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>450</x>
@@ -204,6 +232,9 @@
       </property>
      </widget>
      <widget class="QPushButton" name="stop_track_1">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -216,186 +247,81 @@
        <string>Stop</string>
       </property>
      </widget>
-    </widget>
-    <widget class="QGroupBox" name="track_3">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>500</y>
-       <width>700</width>
-       <height>230</height>
-      </rect>
-     </property>
-     <property name="title">
-      <string>Track 3</string>
-     </property>
-     <widget class="QPushButton" name="track_3_import">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
+     <widget class="QSlider" name="track_1_vol">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>140</y>
-        <width>93</width>
-        <height>28</height>
+        <x>690</x>
+        <y>60</y>
+        <width>22</width>
+        <height>160</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Import</string>
-      </property>
-     </widget>
-     <widget class="QCheckBox" name="track_3_enable">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>50</y>
-        <width>81</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Enable</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="track_3_box">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>180</y>
-        <width>121</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <item>
-       <property name="text">
-        <string>None</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Piano</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>Guitarra</string>
-       </property>
-      </item>
-      <item>
-       <property name="text">
-        <string>ASDR</string>
-       </property>
-      </item>
-     </widget>
-     <widget class="QSpinBox" name="channel_3_box">
-      <property name="geometry">
-       <rect>
-        <x>50</x>
-        <y>110</y>
-        <width>42</width>
-        <height>22</height>
-       </rect>
+      <property name="maximum">
+       <number>100</number>
       </property>
       <property name="value">
-       <number>0</number>
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
       </property>
      </widget>
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="label_54">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>90</y>
+        <x>680</x>
+        <y>30</y>
         <width>55</width>
         <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Channel</string>
+       <string>Volume</string>
       </property>
      </widget>
-     <widget class="QTabWidget" name="tabWidget_3">
+     <widget class="QLabel" name="label_55">
       <property name="geometry">
        <rect>
-        <x>160</x>
-        <y>20</y>
-        <width>511</width>
-        <height>191</height>
-       </rect>
-      </property>
-      <property name="currentIndex">
-       <number>0</number>
-      </property>
-      <widget class="QWidget" name="tab_9">
-       <attribute name="title">
-        <string>Scatter</string>
-       </attribute>
-       <widget class="PlotWidget" name="track_3_scatter">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>491</width>
-          <height>141</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_5">
-       <attribute name="title">
-        <string>Temporal</string>
-       </attribute>
-       <widget class="PlotWidget" name="track_3_temporal">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>491</width>
-          <height>141</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QWidget" name="tab_6">
-       <attribute name="title">
-        <string>Espectrograma</string>
-       </attribute>
-       <widget class="PlotWidget" name="track_3_spectrum">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>501</width>
-          <height>161</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
-     </widget>
-     <widget class="QPushButton" name="play_track_3">
-      <property name="geometry">
-       <rect>
-        <x>440</x>
-        <y>0</y>
-        <width>93</width>
-        <height>28</height>
+        <x>10</x>
+        <y>110</y>
+        <width>16</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Play</string>
+       <string>L</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="stop_track_3">
+     <widget class="QLabel" name="label_56">
       <property name="geometry">
        <rect>
-        <x>550</x>
-        <y>0</y>
-        <width>93</width>
-        <height>28</height>
+        <x>150</x>
+        <y>110</y>
+        <width>16</width>
+        <height>16</height>
        </rect>
       </property>
       <property name="text">
-       <string>Stop</string>
+       <string>R</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="track_1_pan">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>110</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </widget>
@@ -404,7 +330,7 @@
       <rect>
        <x>0</x>
        <y>250</y>
-       <width>700</width>
+       <width>731</width>
        <height>230</height>
       </rect>
      </property>
@@ -418,7 +344,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>130</y>
+        <y>150</y>
         <width>93</width>
         <height>28</height>
        </rect>
@@ -462,7 +388,7 @@
           <x>0</x>
           <y>0</y>
           <width>491</width>
-          <height>141</height>
+          <height>151</height>
          </rect>
         </property>
        </widget>
@@ -528,7 +454,7 @@
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>170</y>
+        <y>180</y>
         <width>121</width>
         <height>31</height>
        </rect>
@@ -550,11 +476,39 @@
       </item>
       <item>
        <property name="text">
-        <string>ASDR</string>
+        <string>Hihat</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Kick</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Clarinete</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Tuba</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Saxo</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Snare</string>
        </property>
       </item>
      </widget>
      <widget class="QPushButton" name="play_track_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>450</x>
@@ -568,6 +522,9 @@
       </property>
      </widget>
      <widget class="QPushButton" name="stop_track_2">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="geometry">
        <rect>
         <x>560</x>
@@ -580,94 +537,367 @@
        <string>Stop</string>
       </property>
      </widget>
+     <widget class="QSlider" name="track_2_vol">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>50</y>
+        <width>22</width>
+        <height>160</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_59">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>20</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Volume</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="track_2_pan">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>120</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_60">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>16</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_61">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>120</y>
+        <width>16</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </widget>
     </widget>
-   </widget>
-   <widget class="QGroupBox" name="time_settings">
-    <property name="geometry">
-     <rect>
-      <x>740</x>
-      <y>20</y>
-      <width>631</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>nose</string>
-    </property>
-    <widget class="QProgressBar" name="progress_bar_time">
+    <widget class="QGroupBox" name="track_3">
      <property name="geometry">
       <rect>
-       <x>170</x>
-       <y>30</y>
-       <width>371</width>
-       <height>20</height>
+       <x>0</x>
+       <y>490</y>
+       <width>731</width>
+       <height>230</height>
       </rect>
      </property>
-     <property name="value">
-      <number>24</number>
+     <property name="title">
+      <string>Track 3</string>
      </property>
-    </widget>
-    <widget class="QSlider" name="slide_bar_time">
-     <property name="geometry">
-      <rect>
-       <x>170</x>
-       <y>60</y>
-       <width>331</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-    </widget>
-    <widget class="QLabel" name="label_time">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>50</y>
-       <width>55</width>
-       <height>16</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Time</string>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="play_button">
-     <property name="geometry">
-      <rect>
-       <x>280</x>
-       <y>90</y>
-       <width>81</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Play</string>
-     </property>
-    </widget>
-    <widget class="QTimeEdit" name="time_box">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>70</y>
-       <width>91</width>
-       <height>21</height>
-      </rect>
-     </property>
-    </widget>
-    <widget class="QToolButton" name="stop_button">
-     <property name="geometry">
-      <rect>
-       <x>390</x>
-       <y>90</y>
-       <width>81</width>
-       <height>41</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Stop</string>
-     </property>
+     <widget class="QPushButton" name="track_3_import">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>160</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Import</string>
+      </property>
+     </widget>
+     <widget class="QCheckBox" name="track_3_enable">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>81</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Enable</string>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="track_3_box">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>190</y>
+        <width>121</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>None</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Piano</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Guitarra</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Hihat</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Kick</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Clarinete</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Tuba</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Saxo</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Snare</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QSpinBox" name="channel_3_box">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>90</y>
+        <width>42</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>0</number>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_3">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>70</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Channel</string>
+      </property>
+     </widget>
+     <widget class="QTabWidget" name="tabWidget_3">
+      <property name="geometry">
+       <rect>
+        <x>170</x>
+        <y>40</y>
+        <width>501</width>
+        <height>191</height>
+       </rect>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab_9">
+       <attribute name="title">
+        <string>Scatter</string>
+       </attribute>
+       <widget class="PlotWidget" name="track_3_scatter">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>491</width>
+          <height>161</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>Temporal</string>
+       </attribute>
+       <widget class="PlotWidget" name="track_3_temporal">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>491</width>
+          <height>141</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>Espectrograma</string>
+       </attribute>
+       <widget class="PlotWidget" name="track_3_spectrum">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>501</width>
+          <height>161</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="play_track_3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>440</x>
+        <y>20</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Play</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="stop_track_3">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>540</x>
+        <y>20</y>
+        <width>93</width>
+        <height>28</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Stop</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="track_3_vol">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>60</y>
+        <width>22</width>
+        <height>160</height>
+       </rect>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_62">
+      <property name="geometry">
+       <rect>
+        <x>680</x>
+        <y>30</y>
+        <width>55</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Volume</string>
+      </property>
+     </widget>
+     <widget class="QSlider" name="track_3_pan">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>130</y>
+        <width>121</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="maximum">
+       <number>100</number>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_63">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>16</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>L</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_64">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>130</y>
+        <width>16</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>R</string>
+      </property>
+     </widget>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_2">
@@ -676,7 +906,7 @@
       <x>750</x>
       <y>170</y>
       <width>571</width>
-      <height>711</height>
+      <height>781</height>
      </rect>
     </property>
     <property name="title">
@@ -4378,18 +4608,112 @@
      </property>
     </widget>
    </widget>
-   <widget class="QToolButton" name="toolButton_effects">
+   <widget class="QGroupBox" name="time_settings">
     <property name="geometry">
      <rect>
-      <x>570</x>
-      <y>770</y>
-      <width>87</width>
-      <height>22</height>
+      <x>730</x>
+      <y>20</y>
+      <width>631</width>
+      <height>101</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Open Effects</string>
+    <property name="title">
+     <string>Play options</string>
     </property>
+    <widget class="QToolButton" name="play_button">
+     <property name="geometry">
+      <rect>
+       <x>210</x>
+       <y>10</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Play</string>
+     </property>
+    </widget>
+    <widget class="QToolButton" name="stop_button">
+     <property name="geometry">
+      <rect>
+       <x>320</x>
+       <y>10</y>
+       <width>81</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Stop</string>
+     </property>
+    </widget>
+    <widget class="QSlider" name="track_pan">
+     <property name="geometry">
+      <rect>
+       <x>140</x>
+       <y>70</y>
+       <width>331</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>100</number>
+     </property>
+     <property name="value">
+      <number>50</number>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_65">
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>70</y>
+       <width>31</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Left</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_90">
+     <property name="geometry">
+      <rect>
+       <x>480</x>
+       <y>70</y>
+       <width>41</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Right</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QGroupBox" name="groupBox_5">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>730</y>
+      <width>731</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <property name="title">
+     <string>Plot</string>
+    </property>
+    <widget class="PlotWidget" name="track_spectrum">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>20</y>
+       <width>711</width>
+       <height>171</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

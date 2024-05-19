@@ -479,7 +479,7 @@ def update(self):
         self.tab_dl_voice_1.setEnabled(True)
         self.tab_dl_voice_2.setEnabled(False)
         self.tab_dl_voice_3.setEnabled(False)
-        self.checkBox_dl_convolution.setEnabled(True)
+        self.checkBox_dl_convolution.setEnabled(False)
 
     else:
         self.tabWidget_dl_voices.setEnabled(False)
@@ -611,7 +611,7 @@ def update(self):
             if dl_voices > 2:
                 self.tab_dl_voice_3.setEnabled(True)
 
-    if (self.input_file_data == [] and self.comboBox_tracks.currentIndex() == 0) \
+    if (len(self.input_file_data) == 0 and self.comboBox_tracks.currentIndex() == 0) \
     or tab_effect >= 2 \
     or (tab_effect == 0 and r_type == 0) \
     or (tab_effect == 1 and dl_type == 0) \
@@ -691,6 +691,14 @@ def apply(self):
     dl_type = self.comboBox_dl_type.currentIndex()
 
     tab_effect = self.tabEffects.currentIndex()
+    track_samples_in = [self.track_data.track_1_samples,
+                        self.track_data.track_2_samples,
+                        self.track_data.track_3_samples,
+                        self.track_data.track_4_samples]
+    index = self.comboBox_tracks.currentIndex()
+    print(index)
+    if index != 0:
+        print(track_samples_in[index-1])
 
     if tab_effect >= 2 \
     or (tab_effect == 0 and r_type == 0) \
@@ -700,8 +708,13 @@ def apply(self):
         self.label_status.setText(err)
         print(err)
         return -1
-    elif self.input_file_data == [] and self.comboBox_tracks.currentIndex() == 0:
+    elif len(self.input_file_data) == 0 and self.comboBox_tracks.currentIndex() == 0:
         err = 'Please select a track or open a WAV file before applying the effect.'
+        self.label_status.setText(err)
+        print(err)
+        return -1
+    elif len(self.input_file_data) == 0 and index != 0 and len(track_samples_in[index-1]) == 0:
+        err = 'Selected track was not ready. Please synthesize first.'
         self.label_status.setText(err)
         print(err)
         return -1
@@ -724,17 +737,16 @@ def apply(self):
     ### Apply Effects ################
 
     x = y = []
-    if self.input_file_data != []:
+    if len(self.input_file_data) != 0:
         x = self.input_file_data
     else:
-        index = self.comboBox_tracks.currentIndex()
-        if index == 0:
+        if index == 1:
             x = self.track_data.track_1_samples
-        elif index == 1:
-            x = self.track_data.track_2_samples
         elif index == 2:
-            x = self.track_data.track_3_samples
+            x = self.track_data.track_2_samples
         elif index == 3:
+            x = self.track_data.track_3_samples
+        elif index == 4:
             x = self.track_data.track_4_samples
 
     if np.ndim(x)>1:
@@ -859,7 +871,7 @@ def apply(self):
             pxx, freqs, bins, im = ax3.specgram(y, Fs=fs)
             ax3.set_xlabel('Time [s]')
             ax3.set_ylabel('Frequency [Hz]')
-            fig.colorbar(im, label="Magnitude $|S_y(t, f)|$")
+            fig.colorbar(im, ax=ax3, label="Magnitude $|S_y(t, f)|$")
             for axn in ax:
                 axn.grid()
         
@@ -918,8 +930,19 @@ def apply(self):
     max_output = max(np.abs(y))
     if (max_output != 0):
         output = 0.5*y/max_output # Max level of output audio. Adjust as needed.
-        self.label_status.setText('Exporting to WAV...')
-        exportWAVFile(self, output)
+        if len(self.input_file_data) != 0:
+            self.label_status.setText('Exporting to WAV...')
+            exportWAVFile(self, output)
+        else:
+            if index == 1:
+                self.track_data.track_1_effects = output
+            elif index == 2:
+                self.track_data.track_2_effects = output
+            elif index == 3:
+                self.track_data.track_3_effects = output
+            elif index == 4:
+                self.track_data.track_4_effects = output
+            self.label_status.setText('Effect applied successfully.')
     else:
         err = 'An error has occurred. Output is empty'
         self.label_status.setText(err)

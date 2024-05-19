@@ -200,14 +200,17 @@ stop_playing = False
 
 def thread_play_samples(self, i):
     node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_samples, self.track_data.track_4_samples]
-    if self.checkBox_r_t1.isChecked():
-        node_samples[0] = self.track_data.track_1_effects
-    if self.checkBox_r_t2.isChecked():
-        node_samples[1] = self.track_data.track_2_effects
-    if self.checkBox_r_t3.isChecked():
-        node_samples[2] = self.track_data.track_3_effects
-    if self.checkBox_r_t4.isChecked():
-        node_samples[3] = self.track_data.track_4_effects
+    print(self.track_data.track_1_effects)
+    if self.comboBox_tracks.currentIndex() == 1  and len(self.track_data.track_1_effects) != 0:
+        node_samples = [self.track_data.track_1_effects, self.track_data.track_2_samples, self.track_data.track_3_samples, self.track_data.track_4_samples]
+    if self.comboBox_tracks.currentIndex() == 2  and len(self.track_data.track_2_effects) != 0:
+        node_samples = [self.track_data.track_1_samples, self.track_data.track_2_effects, self.track_data.track_3_samples, self.track_data.track_4_samples]
+    if self.comboBox_tracks.currentIndex() == 3  and len(self.track_data.track_3_effects) != 0:
+        node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_effects, self.track_data.track_4_samples]
+    if self.comboBox_tracks.currentIndex() == 4  and len(self.track_data.track_4_effects) != 0:
+        node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_samples, self.track_data.track_4_effects]
+
+    
     node_vol = [self.track_1_vol.value()/100, self.track_2_vol.value()/100, self.track_3_vol.value()/100]
     node_pan = [self.track_1_pan.value()/100, self.track_2_pan.value()/100, self.track_3_pan.value()/100]
     
@@ -242,7 +245,6 @@ def thread_play_samples(self, i):
         pl.plot_spectrogram_from_samples(self, self.track_data.track_4_samples)
     else:
         samples = node_vol[i-1]*np.vstack([(1-node_pan[i-1])*(node_samples[i-1]), (node_pan[i-1])*(node_samples[i-1])] ).T
-        pl.plot_spectrogram_from_samples(self, node_samples[i-1])
         
     global stop_playing
     stop_playing = False
