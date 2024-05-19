@@ -3563,6 +3563,9 @@
      <string/>
     </property>
     <widget class="QComboBox" name="comboBox_tracks">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -3572,7 +3575,7 @@
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The effect can be applied to one track at a time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;The effect can be applied to one track at a time or to the merged track.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="currentText">
       <string>Select Track</string>
@@ -3638,7 +3641,7 @@
       <string>Select File</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_apply_effects_2">
+    <widget class="QPushButton" name="pushButton_reset">
      <property name="geometry">
       <rect>
        <x>320</x>
@@ -3661,7 +3664,7 @@
       </rect>
      </property>
      <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Plots input, outputa and spectogram. If convolution was used, the effect impulse and frequency reponse are plotted as well. May increase processing time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Plots input, output and spectogram. If convolution was used, the effect's impulse and frequency reponse are plotted as well. May increase processing time.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
      <property name="text">
       <string>Plot Results</string>

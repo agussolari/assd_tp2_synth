@@ -77,6 +77,9 @@ def connect_enable_buttons(self):
 
 def connect_effects_params(self):
     self.tabEffects.currentChanged.connect(lambda: effects.update(self))
+    self.pushButton_select_file.clicked.connect(lambda: effects.importWAVFile(self))
+    self.pushButton_apply_effects.clicked.connect(lambda: effects.apply(self))
+    self.pushButton_reset.clicked.connect(lambda: effects.reset(self))
 
     # Reverberation
 
@@ -96,7 +99,7 @@ def connect_effects_params(self):
     self.comboBox_r_preset.currentIndexChanged.connect(lambda: effects.update(self))
 
     self.checkBox_r_stereo.clicked.connect(lambda: effects.update(self))
-    self.checkBox_r_convolution.clicked.connect(lambda: effects.update(self))
+    # self.checkBox_r_convolution.clicked.connect(lambda: effects.update(self))
 
     # Delay Line
 
@@ -124,6 +127,8 @@ def connect_effects_params(self):
     self.comboBox_dl_interpolation_3.currentIndexChanged.connect(lambda: effects.update(self))
     self.comboBox_dl_type.currentIndexChanged.connect(lambda: effects.update(self))
 
+    # self.checkBox_dl_convolution.clicked.connect(lambda: effects.update(self))
+
     # Filtering
 
     # self.spinBox_f_nfilters.valueChanged.connect(lambda: effects.update(self))
@@ -148,10 +153,5 @@ def connect_effects_params(self):
 
     # self.comboBox_am_lfo_type.currentIndexChanged.connect(lambda: effects.update(self))
     # self.comboBox_am_lfo_interpolation.currentIndexChanged.connect(lambda: effects.update(self))
-
-    # Apply Effects
-
-    self.pushButton_apply_effects.clicked.connect(lambda: effects.apply(self))
-    self.radioButton_plot.clicked.connect(lambda: effects.update(self))
 
 #################################

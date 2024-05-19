@@ -72,6 +72,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         cs.connect_synth_data(self)
         cs.connect_effects_params(self)
         self.prev_r_dataset = 0
+        self.input_file_data = []
         
 
     # def connect_signals(self):

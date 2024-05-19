@@ -3,7 +3,7 @@ import scipy.signal as signal
 import soundfile as sf
 import matplotlib.pyplot as plt
 from scipy.fft import fft, fftfreq, fftshift
-import matplotlib.gridspec as gridspec
+from PyQt5.QtWidgets import QFileDialog
 
 ### Presets/Pre-Configurations ###
 
@@ -446,6 +446,10 @@ def update(self):
     # int() -> round()
     # reset button
     # stereo input and output
+    # check if files are opened and closed correctly
+    # conv to flanger
+    # double gains if conv?
+    # plots dl equal
 
     if self.comboBox_r_type.currentIndex() != 0:
         self.groupBox_r.setEnabled(True)
@@ -475,12 +479,14 @@ def update(self):
         self.tab_dl_voice_1.setEnabled(True)
         self.tab_dl_voice_2.setEnabled(False)
         self.tab_dl_voice_3.setEnabled(False)
+        self.checkBox_dl_convolution.setEnabled(True)
 
     else:
         self.tabWidget_dl_voices.setEnabled(False)
         self.horizontalSlider_dl_voices.setEnabled(False)
         self.dial_dl_feedback.setEnabled(False)
         self.dial_dl_dry_gain.setEnabled(False)
+        self.checkBox_dl_convolution.setEnabled(False)
 
     if tab_effect == 0:
         if r_type == 1:
@@ -605,7 +611,42 @@ def update(self):
             if dl_voices > 2:
                 self.tab_dl_voice_3.setEnabled(True)
 
-    self.label_status.setText('Ready.')
+    if (self.input_file_data == [] and self.comboBox_tracks.currentIndex() == 0) \
+    or tab_effect >= 2 \
+    or (tab_effect == 0 and r_type == 0) \
+    or (tab_effect == 1 and dl_type == 0) \
+    or (tab_effect == 0 and r_type == 9 and r_preset == 0):
+        self.label_status.setText('Waiting...')
+    else:
+        self.label_status.setText('Ready.')
+
+def importWAVFile(self):
+    filename = QFileDialog.getOpenFileName(self, 'Open File', 'c:\\', 'Audio File (*.wav)')
+    name = str(filename[0])
+    if name:
+        self.input_file_data, sr = sf.read(name)
+        msg = 'Successfully opened input file '+name
+        if len(msg) > 70:
+            msg = msg[:70]+'..'
+        self.label_status.setText(msg+'.')
+
+def exportWAVFile(self, data):
+    filename = QFileDialog.getSaveFileName(self, 'Save Fiile', 'c:\\', 'Audio File (*.wav)')
+    name = str(filename[0])
+    if name:
+        sf.write(name, data, 44100, 'PCM_24')
+        msg = 'Audio was successfully exported to '+name
+        if len(msg) > 70:
+            msg = msg[:70]+'..'
+        self.label_status.setText(msg+'.')
+
+def reset(self):
+    self.input_file_data = []
+    self.track_data.track_1_effects = []
+    self.track_data.track_2_effects = []
+    self.track_data.track_3_effects = []
+    self.track_data.track_4_effects = []
+    self.label_status.setText('Waiting...')
 
 def apply(self):
     self.label_status.setText('Working...') # No sirve son threads
@@ -659,6 +700,11 @@ def apply(self):
         self.label_status.setText(err)
         print(err)
         return -1
+    elif self.input_file_data == [] and self.comboBox_tracks.currentIndex() == 0:
+        err = 'Please select a track or open a WAV file before applying the effect.'
+        self.label_status.setText(err)
+        print(err)
+        return -1
 
     # Control
 
@@ -678,20 +724,22 @@ def apply(self):
     ### Apply Effects ################
 
     x = y = []
-    index = self.comboBox_tracks.currentIndex()
-    if index == 0:
-        x = self.track_data.track_1_samples
-    elif index == 1:
-        x = self.track_data.track_2_samples
-    elif index == 2:
-        x = self.track_data.track_3_samples
+    if self.input_file_data != []:
+        x = self.input_file_data
+    else:
+        index = self.comboBox_tracks.currentIndex()
+        if index == 0:
+            x = self.track_data.track_1_samples
+        elif index == 1:
+            x = self.track_data.track_2_samples
+        elif index == 2:
+            x = self.track_data.track_3_samples
+        elif index == 3:
+            x = self.track_data.track_4_samples
 
-
-    input_sample = 'Pvs.Z - Crazy-Dave.wav'
-    x, sr = sf.read(input_sample)
     if np.ndim(x)>1:
         x = np.mean(x, axis=1)
-    if self.checkBox_r_convolution.isChecked() and tab_effect == 0:
+    if (self.checkBox_r_convolution.isChecked() and tab_effect == 0) or (self.checkBox_dl_convolution.isChecked() and tab_effect == 1):
         x_in = x
         x = np.zeros(2*fs)
         x[0:2] = 1
@@ -742,7 +790,7 @@ def apply(self):
             output = convolutionReverb(x_in, y, dry_gain, wet_gain)
 
         if self.checkBox_r_convolution.isChecked():
-            output = convolutionReverb(x_in, y, dry_gain, wet_gain)
+            output = convolutionReverb(x_in, y, 0, 1)
 
     elif tab_effect == 1:
         if dl_type == 1:
@@ -761,14 +809,14 @@ def apply(self):
             dl_lfo_depth = [dl_lfo_depth]
             dl_lfo_type = [dl_lfo_type]
 
-            if dl_voices == 2:
+            if dl_voices >= 2:
                 dl_lfo_delay.append(dl_lfo_delay_2)
                 dl_lfo_width.append(dl_lfo_width_2)
                 dl_lfo_freq.append(dl_lfo_freq_2)
                 dl_lfo_depth.append(dl_lfo_depth_2)
                 dl_lfo_type.append(dl_lfo_type_2)
 
-            elif dl_voices == 3:
+            if dl_voices >= 3:
                 dl_lfo_delay.append(dl_lfo_delay_3)
                 dl_lfo_width.append(dl_lfo_width_3)
                 dl_lfo_freq.append(dl_lfo_freq_3)
@@ -778,8 +826,11 @@ def apply(self):
             y = flanger(x, fs, dl_lfo_delay, dl_lfo_width, dl_lfo_freq, dl_lfo_depth,
                         dl_dry_gain, dl_feedback, dl_lfo_type)
 
+        if self.checkBox_dl_convolution.isChecked():
+            output = convolutionReverb(x_in, y, 0, 1)
+
     rows = 2
-    if (self.checkBox_r_convolution.isChecked() or r_type == 9) and tab_effect == 0:
+    if ((self.checkBox_r_convolution.isChecked() or r_type == 9) and tab_effect == 0) or (self.checkBox_dl_convolution.isChecked() and tab_effect == 1):
         rows = 3
 
     if self.radioButton_plot.isChecked():
@@ -838,7 +889,6 @@ def apply(self):
             ax[3].set_title('Output')
             ax[3].set_ylabel('Amplitude')
             ax[3].set_xlabel('Time [s]')
-            ax[3].grid()
             # fig.subplots_adjust(hspace=0)
             # plt.setp([a.get_xticklabels() for a in ax[:-1]], visible=False)
             sp = fftshift(fft(y))
@@ -867,9 +917,9 @@ def apply(self):
         y = output
     max_output = max(np.abs(y))
     if (max_output != 0):
-        output = 0.5*y/max_output # Max level of audio. Adjust as needed.
-        sf.write('test.wav', output, fs, 'PCM_24')
-        self.label_status.setText('Done.')
+        output = 0.5*y/max_output # Max level of output audio. Adjust as needed.
+        self.label_status.setText('Exporting to WAV...')
+        exportWAVFile(self, output)
     else:
         err = 'An error has occurred. Output is empty'
         self.label_status.setText(err)

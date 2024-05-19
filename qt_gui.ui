@@ -4295,7 +4295,7 @@
        <string>Select File</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_apply_effects_2">
+     <widget class="QPushButton" name="pushButton_reset">
       <property name="geometry">
        <rect>
         <x>320</x>
@@ -4361,7 +4361,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>Ready</string>
+      <string>Waiting...</string>
      </property>
     </widget>
     <widget class="QLabel" name="label_45">
