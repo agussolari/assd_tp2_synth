@@ -41,6 +41,7 @@ def connect_play_buttons(self):
     self.play_track_3.clicked.connect(lambda: fi.thread_play_samples(self, 3))
     self.play_button.clicked.connect(lambda: fi.thread_play_samples(self, 4))
     # self.play_button.clicked.connect(lambda: pl.plot_spectrogram_from_samples(self))
+    self.pushButton_export_wav.clicked.connect(lambda: effects.exportWAVFile(self, self.track_data.track_4_samples))
     
 def connect_stop_buttons(self):
     self.stop_track_1.clicked.connect(lambda: fi.stop_playback())

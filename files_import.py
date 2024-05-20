@@ -199,16 +199,23 @@ def plot_data(self, i):
 stop_playing = False
 
 def thread_play_samples(self, i):
-    node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_samples, self.track_data.track_4_samples]
-    print(self.track_data.track_1_effects)
-    if self.comboBox_tracks.currentIndex() == 1  and len(self.track_data.track_1_effects) != 0:
-        node_samples = [self.track_data.track_1_effects, self.track_data.track_2_samples, self.track_data.track_3_samples, self.track_data.track_4_samples]
-    if self.comboBox_tracks.currentIndex() == 2  and len(self.track_data.track_2_effects) != 0:
-        node_samples = [self.track_data.track_1_samples, self.track_data.track_2_effects, self.track_data.track_3_samples, self.track_data.track_4_samples]
-    if self.comboBox_tracks.currentIndex() == 3  and len(self.track_data.track_3_effects) != 0:
-        node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_effects, self.track_data.track_4_samples]
-    if self.comboBox_tracks.currentIndex() == 4  and len(self.track_data.track_4_effects) != 0:
-        node_samples = [self.track_data.track_1_samples, self.track_data.track_2_samples, self.track_data.track_3_samples, self.track_data.track_4_effects]
+    node_samples = []
+    if len(self.track_data.track_1_effects) != 0:
+        node_samples.append(self.track_data.track_1_effects)
+    else:
+        node_samples.append(self.track_data.track_1_samples)
+    if len(self.track_data.track_2_effects) != 0:
+        node_samples.append(self.track_data.track_2_effects)
+    else:
+        node_samples.append(self.track_data.track_2_samples)
+    if len(self.track_data.track_3_effects) != 0:
+        node_samples.append(self.track_data.track_3_effects)
+    else:
+        node_samples.append(self.track_data.track_3_samples)
+    if len(self.track_data.track_4_effects) != 0:
+        node_samples.append(self.track_data.track_4_effects)
+    else:
+        node_samples.append(self.track_data.track_4_samples)
 
     
     node_vol = [self.track_1_vol.value()/100, self.track_2_vol.value()/100, self.track_3_vol.value()/100]

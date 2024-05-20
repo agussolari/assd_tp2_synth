@@ -696,9 +696,6 @@ def apply(self):
                         self.track_data.track_3_samples,
                         self.track_data.track_4_samples]
     index = self.comboBox_tracks.currentIndex()
-    print(index)
-    if index != 0:
-        print(track_samples_in[index-1])
 
     if tab_effect >= 2 \
     or (tab_effect == 0 and r_type == 0) \
@@ -708,7 +705,7 @@ def apply(self):
         self.label_status.setText(err)
         print(err)
         return -1
-    elif len(self.input_file_data) == 0 and self.comboBox_tracks.currentIndex() == 0:
+    elif len(self.input_file_data) == 0 and index == 0:
         err = 'Please select a track or open a WAV file before applying the effect.'
         self.label_status.setText(err)
         print(err)
